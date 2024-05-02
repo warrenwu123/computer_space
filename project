@@ -1,0 +1,15 @@
+Step 1: check the method to produce the solution, we can find that the solution is produced by seed function with a specific initial value, which means that we can predict the outcome of every coin-flip as long as we know the  initial value in seed function.
+
+Step 2: look through the specific content of initial value, we can find that it is made up from three parts, round _ and session ID. We can use the Devtools of Chorme which we can open it by ctrl+shift_i to find the session, which is in the request headers of network option, then copy this session and decode it using base64, we can get the correct session ID 
+ 
+Step 3: Therefore, using session ID and number of round we are processing, we can predict the next outcome, then bet all my fortune in every game, we are going to get 10000 emu soon
+
+
+
+
+
+
+
+
+Step 3: Therefore, using session ID and number of round we are processing, we can predict the next outcome, then bet all my fortune in every game, we are going to get 10000 emu soon
+
