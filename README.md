@@ -1,8 +1,14 @@
+# Lab1-5
+
+Student ID: 24372276
+
+Student Name: ZIhan Wu
+
 # Lab 1
 
-## AWS Accounts and Log In
+# AWS Accounts and Log In
 
-### Step 1 Log into an IAM user account created for you on AWS.
+## [1] Log into an IAM user account created for you on AWS.
 
 First, i get to the website `[https://489389878001.signin.aws.amazon.com/console]`
 
@@ -14,14 +20,16 @@ then, I used the username `24372276@student.uwa.edu.au` and password to login in
 ### output:
 <img width="865" height="427" alt="image" src="https://github.com/user-attachments/assets/2714d19a-7865-4166-a7fb-9acc812d9ff3" />
 
-### Step 2 Search and open Identity Access Management
+## Search and open Identity Access Management
+
+### Step 1: entering into Security Credential page
 
 I clicked the IAM-Security Credential part, entering into this page below 
 
 ### output:
 <img width="865" height="427" alt="image" src="https://github.com/user-attachments/assets/a7f6f74b-d6e9-4a74-82da-76d20e61818c" />
 
-
+### Step 2: Creating access key
 then, i clicked `create access key` to create access key 
 
 First, we need to choose use case. As we would like to use this access key to access AWS in the command interface, so we choose CLI as use case.
@@ -29,12 +37,10 @@ First, we need to choose use case. As we would like to use this access key to ac
 ### output:
 <img width="865" height="427" alt="image" src="https://github.com/user-attachments/assets/57de8538-dae1-4eb7-97ce-689783902224" />
 
-
 Second is the description for this key. I set it to " Connect to AWS service from Linux
 
 ### output:
 <img width="865" height="427" alt="image" src="https://github.com/user-attachments/assets/d6e15f22-490e-4a0d-b1df-d281918e731d" />
-
 
 Then, click access key, we can get our access key, which has access key and secret access key. 
 
@@ -42,7 +48,7 @@ Then, click access key, we can get our access key, which has access key and secr
 <img width="865" height="427" alt="image" src="https://github.com/user-attachments/assets/2a0dc0e1-058c-4c2a-a602-5078a3897bdc" />
 
 
-## Set up recent Unix-like OSes
+# Set up recent Unix-like OSes
 
 I'm the Windows Users. when I input wsl to my poershell, it will go into wsl 
 ### output:
@@ -55,9 +61,9 @@ wsl -l -v
 we can see the version of wsl, which is ubuntu 24.04
 <img width="615" height="105" alt="image" src="https://github.com/user-attachments/assets/104397da-ffc2-40b9-b48f-5905fea4b847" />
 
-## Install Linux packages
+# Install Linux packages
 
-### step 1 Install Python
+## [1] Install Python
 
 First, I updated all the packages to the lastest version by putting the code below 
 
