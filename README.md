@@ -20,7 +20,7 @@ then, I used the username `24372276@student.uwa.edu.au` and password to login in
 ### output:
 <img width="865" height="427" alt="image" src="https://github.com/user-attachments/assets/2714d19a-7865-4166-a7fb-9acc812d9ff3" />
 
-## Search and open Identity Access Management
+## [2] Search and open Identity Access Management
 
 ### Step 1: entering into Security Credential page
 
@@ -58,12 +58,19 @@ then, i would like to check the version of my wsl, i input the code below
 ```
 wsl -l -v
 ```
+```
+-l : means list
+-v : means showing version
+```
+
 we can see the version of wsl, which is ubuntu 24.04
 <img width="615" height="105" alt="image" src="https://github.com/user-attachments/assets/104397da-ffc2-40b9-b48f-5905fea4b847" />
 
 # Install Linux packages
 
 ## [1] Install Python
+
+### Step 1: update packages 
 
 First, I updated all the packages to the lastest version by putting the code below 
 
@@ -77,10 +84,10 @@ Then, check the version of python by putting the code below, showing that i have
 ```
 python3 -V
 ```
-
+### output:
 <img width="865" height="65" alt="image" src="https://github.com/user-attachments/assets/5e077159-d270-4aee-acfb-648ec3760c79" />
 
-
+### Step 2: install pip3  
 Then, I install the pip3 packages 
 
 ```
@@ -89,7 +96,7 @@ sudo apt install -y python3-pip
 
 <img width="865" height="564" alt="image" src="https://github.com/user-attachments/assets/acd43a87-208a-4710-a2b9-74c07a5f8358" />
 
-### step 2 Install awscli
+## [2] Install awscli
 
 we use the code below to install awscli, which is the package that allows us to configure aws and get access to aws service 
 
@@ -112,7 +119,7 @@ sudo snap install aws-cli --classic
 After doing this, it will be installed successfully 
 <img width="865" height="62" alt="image" src="https://github.com/user-attachments/assets/07876c1a-a848-4861-be84-64e4543a018f" />
 
-### step 3 Configure AWS
+### [3] Configure AWS
 
 put the code below to configure aws 
 
@@ -131,7 +138,7 @@ And the default output format is json
 
 <img width="865" height="127" alt="image" src="https://github.com/user-attachments/assets/23bc4275-6003-4ef0-9c0a-479fb8305b85" />
 
-### step 4 Install boto3
+### [4] Install boto3
 
 boto3 is the root package to use all the services and resources in AWS, so we need to install it by putting the code below 
 
@@ -145,14 +152,14 @@ And we successfully installed it
 <img width="865" height="383" alt="image" src="https://github.com/user-attachments/assets/5fb65d27-7795-4f86-8ad6-5f971a8dcc43" />
 
 
-## Test the installed environment
+# Test the installed environment
 
 
-### step 1 Test the AWS environment
+## [1] Test the AWS environment
 
 For this part, we need to test if AWS is configured successfully and if we can get access to its service and resources.
 
-First, we 
+Code:by using ec2 command to get regions table
 
 ```
 aws ec2 describe-regions --output table
@@ -171,7 +178,7 @@ So, we will get the table including all the available regions in AWS
 <img width="865" height="493" alt="image" src="https://github.com/user-attachments/assets/61e123f5-ec96-46ff-b277-9c9f95315043" />
 
 
-### step 2 Test the python environment
+## [2] Test the python environment
 
 Second, we need to test if the python works
 
@@ -195,8 +202,10 @@ then, i will get the json file including all regions
 
 <img width="865" height="418" alt="image" src="https://github.com/user-attachments/assets/bb3b9f38-12f7-423a-a0fc-378d8a41b338" />
 
-### Step 3 Write a Python script
+## [3] Write a Python script
 In this part, we would like to show region table by usin python script
+
+### Step 1 Install tabulate package
 
 in order to show the endpoint and regionname table, we need to install tabulate first, which is a library that can make data as a table 
 
@@ -210,6 +219,8 @@ pip install tabulate --break-system-packages
 --break-system-packages: pass the external envrionment notice
 ```
 <img width="865" height="135" alt="image" src="https://github.com/user-attachments/assets/8b19ebe1-2cf4-403a-a23f-d7975b31abc1" />
+
+### Step 2 Show the region table
 
 Then, we put the code below into console to create a region table 
 
@@ -235,8 +246,8 @@ The output is just like this, from this table, we can see all the endpoints and 
 
 # Lab 2
 
-## Create an EC2 instance using awscli
-### Step 1 : Create an EC2 instance using awscli
+# Create an EC2 instance using awscli
+## [1] Create a security group
 
 Code:
 ```
@@ -252,7 +263,7 @@ For this project, we don’t need to set the vpc-id
 then, we wull get the response including groupid and securitygrouparn
 <img width="865" height="81" alt="image" src="https://github.com/user-attachments/assets/0cda75ef-e51d-4830-ad9d-ac87333f0bb9" />
 
-### Step 2 : Authorise inbound traffic for ssh
+## [2] Authorise inbound traffic for ssh
 
 In this part, we need to set the policy for inbound traffic
 code:
@@ -279,7 +290,7 @@ The output is like this below, it will show the securitygrouprules we just set
 
 <img width="865" height="229" alt="image" src="https://github.com/user-attachments/assets/57f3fcac-1c47-471f-9695-e1dedff1c566" />
 
-### Step 3 Create a key pair
+## [3] Create a key pair
 
 we need to create a key pair to let AWS verify identification from users, it will generate a public key on ec2 and private on our local machine.
 
@@ -310,13 +321,13 @@ Explaination:
  <student number>-key.pem is the file name where the private key will be saved locally.
 ```
 
-### Step 4: Set the permission for this 
+## [4] Set the permission for this 
 By running this code, we set the private key to only-read mode.
 ```
 chmod 400 24372276-key.pem
 ```
 
-### Step 5: Launch a new  instance 
+## [5] Launch a new instance 
 
 In this step, we launch the ec2 instance on AWS 
 
@@ -352,10 +363,10 @@ Like we did before, this parameter limit the output of the console, Specifically
 InstanceId is a unique identifier for your EC2 instance (like i-0abcd1234ef56789).
 ```
 
-This will return the output of instance id
+This will return the output of instance id, which is 
 <img width="865" height="43" alt="image" src="https://github.com/user-attachments/assets/f8badb20-9f35-4309-b9f8-86bc0a64e06a" />
 
-### Step 6 Add a tag to your Instance
+## [6] Add a tag to your Instance
 In this part, we would like to assign the name for our instance 
 Code:
 ```
@@ -374,7 +385,7 @@ Key=Name is a common convention in AWS to give a human-readable name to an insta
 Value=<Instance Name> is the actual name you want to assign (e.g., MyEC2Instance). As The tutorial provided, I need to set the name of the tags as 24372276-vm
 ```
 
-### Step 7 get the public ip address 
+### [7] Get the public ip address 
 In this step, we are getting the ip address that ec2 opens for external users to get access to it 
 Code: 
 ```
@@ -394,7 +405,7 @@ Explaination:
 This will return the output of ip address,which is `13.239.39.99`
 <img width="865" height="38" alt="image" src="https://github.com/user-attachments/assets/a70cfa30-e6d7-434b-a679-0cfe5da41ec1" />
 
-### Step 8 List the created instance using the AWS console
+## [8] Connect to the instance via ssh
 Then we use this ip address to connect the instance 
 
 **Code:**
@@ -417,13 +428,13 @@ Then, after putting code, I connected the instance successfully.
 
 <img width="865" height="601" alt="image" src="https://github.com/user-attachments/assets/21f9c973-15e6-44e1-aeba-e8b023869a33" />
 
-### Step 9: check the instance in AWS console
+### [9] List the created instance using the AWS console
 
 When I check the region ap-southeast-2, I can find the instance that is named by my id. 
 
 <img width="865" height="109" alt="image" src="https://github.com/user-attachments/assets/b07f0a04-b793-43a2-b1a2-0e5d8de52679" />
 
-## Create a python script 
+# Create an EC2 instance with Python Boto3
 In this part, we are going to use python script to create a new instance. For the new instance that we are going to create, we are going to set different key name, security group name and instance name 
 
 following the steps like we just did before, I created the python script to create new instance
@@ -528,9 +539,9 @@ When I ran the python script, it will return the ip address finally.
 <img width="865" height="94" alt="image" src="https://github.com/user-attachments/assets/943adbb9-7a24-4fd2-91f9-dee194aa329c" />
 
 
-## Install Docker
+# Install Docker
 
-### Step 1 Install Docker
+## [1] Install Docker
 
 Code:
 ```
@@ -544,7 +555,7 @@ This command is used for downloading the docker package
 
 <img width="865" height="366" alt="image" src="https://github.com/user-attachments/assets/5bff8ddb-cfd1-4ea5-9d72-0a9a99266089" />
 
-### Step 2 start and enable docker 
+### [2] start and enable docker 
 
 running those two code lines to start and enable docker, then we could use it to get image or create image later
 
@@ -553,7 +564,7 @@ sudo systemctl start docker
 sudo systemctl enable docker
 ```
 
-### Step 3 check the version 
+### [3] check the version 
 
 Code:
 ```
@@ -563,10 +574,10 @@ docker –version
 <img width="865" height="42" alt="image" src="https://github.com/user-attachments/assets/8d597ef3-446a-4fda-8ad2-6a56025b6542" />
 
 
-## Build and run an httpd container
+# Build and run an httpd container
 
-### Step 1 create html file and Dockerfile
-
+## [1] create html file and Dockerfile
+### Step 1 Create html and directory
 First, I created a new directory html by inputting code
 
 ```
@@ -579,6 +590,7 @@ touch index.html
 ```
 touch is the command that is used to create the new file
 
+### Step 2: Add contents to html.txt and DockerFile
 then, I added the basic html code into it.
 
 Output:
@@ -613,7 +625,7 @@ This piece of code is used to copy files from your computer (build context) into
 
 <img width="1317" height="219" alt="image" src="https://github.com/user-attachments/assets/d79a7dbb-314b-4fb2-9a47-32a089549cee" />
 
-### Step 2 Build a docker image
+## [2] Build a docker image
 
 In this step, we would like to build an image.
 
@@ -634,7 +646,7 @@ After my-apache2, it will be the path, which tells Docker where to look for the 
 
 <img width="865" height="406" alt="image" src="https://github.com/user-attachments/assets/49fe354b-cc3b-4a69-854c-9650ca148843" />
 
-### Step 3 run docker 
+## [3] run docker 
 
 Code:
 ```
@@ -667,7 +679,8 @@ After running this code, get access to the url http://localhost. It will show th
 
 <img width="658" height="368" alt="image" src="https://github.com/user-attachments/assets/f6fe78df-a6e7-482f-954b-74a8d0baf58a" />
 
-### Step 4 remove docker
+##[4] remove docker
+### Step 1 Showing all current running docker
 
 First, showing all the current running docker
 
@@ -677,6 +690,7 @@ docker ps -a
 ```
 
 <img width="1713" height="141" alt="image" src="https://github.com/user-attachments/assets/8ae983d2-c9a5-4726-bebc-6780da9c274f" />
+### Step 2 Stop the target docker
 
 Second, stop the current running docker my-app
 ```
@@ -684,6 +698,8 @@ docker stop my-app
 ```
 
 <img width="948" height="69" alt="image" src="https://github.com/user-attachments/assets/dece645c-70d9-4351-9d07-1022f79b75b3" />
+
+### Step 3 Remove docker
 
 Then, remove it and list it again, it will show no docker is running 
 
@@ -697,34 +713,35 @@ docker ps -a
 
 # Lab 3
 
-## Preparation 
+# Program
 
-### Step1 Create a directory rootdir
+## [1] Preparation
+
+### Step 1  create a rootfir directory
 
 Execute the code below to create a directory rootdir
 
 ```
 Mkdir rootdir
 ```
-
+### Step 2 create a rootdir.txt inside it 
 And then input the code below to create file rootdir.txt 
 
 ```
 cd ./rootdir
 touch rootfile.txt
 ```
-
+### Step 3 create a subdir directory and subdir.txt
 then, create a subdir directory and subdir.txt as the same way
 ```
 Mkdir subdir
 touch subdir.txt
 ```
-
 and write some contents that are required in them
 
 <img width="940" height="536" alt="image" src="https://github.com/user-attachments/assets/23c73dcc-a038-4e42-89c0-05d0e9c5445b" />
 
-### Step2 Save files to S3 bucket
+## [2] Save files to S3 bucket
 
 I changed the cloudstorage.py like this below. This piece of code helps us create s3 bucket with the name that I defined and find the rootdir directory and all the files inside it, then put them all into s3 bucket
 
@@ -803,7 +820,7 @@ When I ran this code, it will show that we already put the all the files into th
 <img width="940" height="104" alt="image" src="https://github.com/user-attachments/assets/7cdc71e0-99a9-4e71-bbf5-5b0222d70ba0" />
 
 
-### Step 3 Restore from S3
+## [3] Restore from S3
 
 I created the python script called restorefromcloud.py to Restore files from S3 and make the local directory and file keep the same structure and content.
 Specifically, I created a new directory called restored_rootdir as the rootdir, then copy the file as corresponded path. 
@@ -859,20 +876,21 @@ And when I check my directory,  the restored_rootdir has been created and keep t
 <img width="504" height="141" alt="image" src="https://github.com/user-attachments/assets/913eb347-8967-44cf-af0b-568bbc05df65" />
 
 
-### Step 4: Write information about files to DynamoDB
+## [4] Write information about files to DynamoDB
 
+### Step 1 create a dynamodb folder to get response
 First, create the dynamodb directory and get into it. 
 ```
 mkdir dynamodb
 ```
-
+### Step 2 install jre
 Then, we need to get the dynamodb running in the local machine. 
 To get this, we need to install the jre package first, which allows your system to run Java programs
 
 ```
 sudo apt-get install default-jre
 ```
-
+### Step 3 get dynamodb_local_latest.tar.gz and extract tar file
 then we get the dynamodb_local_latest.tar.gz from remote repository. 
 ```
 wget https://s3-ap-northeast-1.amazonaws.com/dynamodb-local-tokyo/dynamodb_local_latest.tar.gz
@@ -893,6 +911,7 @@ tar -zxvf dynamodb_local_latest.tar.gz
 it will retreive all the files that initialized the DynamnoDB
 <img width="462" height="303" alt="image" src="https://github.com/user-attachments/assets/219702d3-19b6-4fd4-aabd-3b882df5c256" />
 
+### Step 4 Activate local DynamoDB
 then we run the code below to activate local DynamoDB
 
 ```
@@ -903,7 +922,7 @@ From the wsl, we can see the DynamoDB is running now
 
 <img width="940" height="164" alt="image" src="https://github.com/user-attachments/assets/e6efded8-b7b8-4b5e-ab9c-4a987481e231" />
 
-
+### Step 5 save files from s3 to DynamoDB
 Next, we need to create table on our local database. So first, we create python script to finish the logic. The python script we created is as below.
 
 ```
@@ -1007,7 +1026,7 @@ And as the requirements, we extract all the attributes from the response that is
 
 <img width="940" height="138" alt="image" src="https://github.com/user-attachments/assets/93d48d4a-5283-472d-8a4f-5f52198a4f91" />
 
-### Step 5: scan the table
+## [5] scan the table
 
 We use the code to scan the local tables 
 ```
@@ -1072,7 +1091,7 @@ Then, we can see the output on the console
 }
 ```
 
-### Step 6 delete the table
+## [6] delete the table
 
 Code:
 ```
@@ -1126,8 +1145,8 @@ Then we get the outcome in the console
 
 # Lab 4 
 
-## Apply a policy to restrict permissions on the bucket
-### Step 1 Apply policy to my S3 bucket
+# Apply a policy to restrict permissions on the bucket
+## [1] Apply policy to my S3 bucket
 
 First, I created a new S3 bucket with the same name and region name
 
@@ -1211,7 +1230,7 @@ Then, we run this python script.
 <img width="865" height="50" alt="image" src="https://github.com/user-attachments/assets/c7e42eec-78db-4fcc-8879-43b413155460" />
 
 
-### Step 2 Check whether the script works
+## [2] Check whether the script works
 We use the command below to list all the policies within my bucket. 
 
 ```
@@ -1226,9 +1245,9 @@ bucket <s3_bucket_name>: Replace <s3_bucket_name> with our own bucket name.
 it will show the policy we just set 
 <img width="1704" height="180" alt="image" src="https://github.com/user-attachments/assets/ce92cc1c-33ea-4388-8cea-20ff0b80d330" />
 
-## AES Encryption using KMS
+# AES Encryption using KMS
 
-### Step 1 Create a KMS key
+## [1] Create a KMS key
 
 I will create a python script to create KMS key and set the alias name for the KMS key 
 
@@ -1268,7 +1287,7 @@ This is the common choice for data encryption (AES-256).
 ```
 
 
-Step 2: Attach a policy to the created KMS key
+## [2] Attach a policy to the created KMS key
 
 To  attach the policy to the created KMS key, I created a new script set_policy_to_kms.py. By getting key id from alias, we can set the policy into kms successfully. 
 
@@ -1379,13 +1398,13 @@ when we run this code, we can see
 
 <img width="865" height="74" alt="image" src="https://github.com/user-attachments/assets/b8358415-9d65-4729-bc89-db44da734c2e" />
 
-### Step 3 Check whether the script works
+## [3] Check whether the script works
 
 In the AWS KMS console, I clicked the alias named 24372276 that I just set, and we can see the policy showing that I’m the only key administrator and user
 <img width="865" height="212" alt="image" src="https://github.com/user-attachments/assets/63488c5b-99bd-4af8-b41a-e80774228ea1" />
 <img width="865" height="429" alt="image" src="https://github.com/user-attachments/assets/cb6bc5c1-098b-49b7-b8c6-befaa72800c2" />
 
-### Step 4: encrypt and decrypt file from s3
+## [4] Encrypt and decrypt file from s3
 
 First, we created a new folder called kmsfile to store the outcome.
 ```
@@ -1457,7 +1476,7 @@ for obj in response["Contents"]:
 
 <img width="865" height="186" alt="image" src="https://github.com/user-attachments/assets/b4cbe976-165c-43ce-b41b-85a35c5b35c2" />
 
-### Step 5 Apply pycryptodome for encryption/decryption
+## [5] Apply pycryptodome for encryption/decryption
 
 In this step, we use a new method pycryptodome to encrypt and decrypt files 
 
@@ -1563,7 +1582,7 @@ then, get all the files and encrypt and decrypt
 <img width="865" height="123" alt="image" src="https://github.com/user-attachments/assets/0a204fbd-9f63-406b-a58e-bae89971393a" />
 
 
-### Step 6 upload the files into s3 bucket
+## [6] upload the files into s3 bucket
 
 We have two folders that need to be uploaded, like we did before, we walk through both folders and upload all the files within folders into s3 bucket. 
 
@@ -1609,9 +1628,9 @@ it will show all files have been uploaded when we ran this script
 
 # Lab 5
 
-## Application Load Balancer
+# Application Load Balancer
 
-### Step 1 Create 2 EC2 instances
+## [1] Create 2 EC2 instances
 
 We are going to create 2 EC2 instances as requirements, which includes creating a security group and inbound traffic setting. 
 
@@ -1726,7 +1745,7 @@ for res in instances_desc["Reservations"]:
         print(f"Instance {inst['InstanceId']} is running at {inst['PublicIpAddress']}")
 ```
 
-### Step 2 Create a load banlancer
+## [2] Create a load banlancer
 
 First, we set the parameters for load balancer
 
@@ -1795,7 +1814,7 @@ print("✅ Listener created and attached to load balancer.")
 When we run this code piece, we will get the outcome below. 
 <img width="865" height="125" alt="image" src="https://github.com/user-attachments/assets/1123c520-ea39-42f1-a623-b57551e3a4da" />
 
-### Step 3 test the load balancer
+## [3] test the load balancer
 
 First, we try to use the ssh to get access to ec2 instance 
 ```
@@ -1840,7 +1859,7 @@ And I get into the ec2 instance successfully
 <img width="865" height="406" alt="image" src="https://github.com/user-attachments/assets/db52a185-fad9-44f6-ad31-1d1a2ad2fc6f" />
 
 
-### Step 4 install apache2 
+### Step 1 install apache2 
 
 Then, we run those two lines of code to install apache2 
 ```
@@ -1848,7 +1867,7 @@ sudo apt-get update
 sudo apt install apache2
 ```
 
-### Step 5 change the title
+### Step 2 change the title
 
 In the ec2 instance, We run the code to start editing the html page 
 
@@ -1867,7 +1886,7 @@ I changed the tile to instance name "24372276-vm1"
 
 Use Ctrl+O+enter to save and ctrl+x to exit 
 
-### Step 6 Test in the browser 
+### Step 3 Test in the browser 
 
 First, keep the ec2 open, then input http://3.25.119.9/ in the browser, we will see the correct page below 
 
