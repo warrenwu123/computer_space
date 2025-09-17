@@ -24,7 +24,7 @@ then, I used the username `24372276@student.uwa.edu.au` and password to login in
 
 ### Step 1: entering into Security Credential page
 
-I clicked the IAM-Security Credential part, entering into this page below 
+I clicked the IAM > Security Credentials section, which navigated me to the page for managing access keys and other credentials.
 
 ### output:
 <img width="865" height="427" alt="image" src="https://github.com/user-attachments/assets/a7f6f74b-d6e9-4a74-82da-76d20e61818c" />
@@ -32,8 +32,7 @@ I clicked the IAM-Security Credential part, entering into this page below
 ### Step 2: Creating access key
 then, i clicked `create access key` to create access key 
 
-First, we need to choose use case. As we would like to use this access key to access AWS in the command interface, so we choose CLI as use case.
-
+First, we need to choose a use case. As we would like to use this access key to access AWS in the command interface, I chose "Command Line Interface (CLI)" as the use case. This option is selected because it optimizes the key for CLI usage, ensuring compatibility with tools like awscli.
 ### output:
 <img width="865" height="427" alt="image" src="https://github.com/user-attachments/assets/57de8538-dae1-4eb7-97ce-689783902224" />
 
@@ -49,18 +48,18 @@ Then, click access key, we can get our access key, which has access key and secr
 
 
 # Set up recent Unix-like OSes
-
-I'm the Windows Users. when I input wsl to my poershell, it will go into wsl 
+Purpose: Setting up a Unix-like environment (via WSL on Windows) provides a Linux-based terminal for running AWS CLI commands, which are more native to Unix systems. This ensures compatibility and ease of use for subsequent labs.
+I'm the Windows Users. when I input wsl to my poershell, it enters the Windows Subsystem for Linux (WSL) environment.
 ### output:
 <img width="1644" height="174" alt="image" src="https://github.com/user-attachments/assets/624010ec-384d-439a-adca-3b21c9a11453" />
 
-then, i would like to check the version of my wsl, i input the code below
+Then, I checked the version of my WSL by inputting the code below:
 ```
 wsl -l -v
 ```
 ```
--l : means list
--v : means showing version
+-l : Lists all installed distributions.
+-v : Displays verbose output, including the version of each distribution.
 ```
 
 we can see the version of wsl, which is ubuntu 24.04
@@ -79,10 +78,20 @@ sudo apt update
 sudo apt -y upgrade
 ```
 
+Explaination:
+```
+sudo apt update: Fetches the latest package lists from repositories.
+sudo apt -y upgrade: Upgrades all installed packages to their latest versions, with -y automatically answering "yes" to prompts for non-interactive execution.
+```
+This step is chosen to ensure the system is up-to-date, preventing compatibility issues.
+
 Then, check the version of python by putting the code below, showing that i have the lastest version python 
 
 ```
 python3 -V
+```
+```
+-V: Displays the Python version.
 ```
 ### output:
 <img width="865" height="65" alt="image" src="https://github.com/user-attachments/assets/5e077159-d270-4aee-acfb-648ec3760c79" />
@@ -93,10 +102,16 @@ Then, I install the pip3 packages
 ```
 sudo apt install -y python3-pip
 ```
+```
+sudo apt install -y python3-pip: Installs pip for Python 3, with -y for non-interactive mode.
+```
 
+### output:
 <img width="865" height="564" alt="image" src="https://github.com/user-attachments/assets/acd43a87-208a-4710-a2b9-74c07a5f8358" />
 
 ## [2] Install awscli
+
+AWS CLI is installed to enable command-line access to AWS services, allowing automation and testing without the console.
 
 we use the code below to install awscli, which is the package that allows us to configure aws and get access to aws service 
 
@@ -104,6 +119,7 @@ we use the code below to install awscli, which is the package that allows us to 
 sudo apt install awscli
 ```
 but it shows the package seems to be obsolete 
+### output:
 <img width="865" height="194" alt="image" src="https://github.com/user-attachments/assets/6bd790c3-38b8-4d7d-81d1-3ffcf435518b" />
 
 So, i changed another way to install this package by running this code below 
@@ -112,14 +128,17 @@ So, i changed another way to install this package by running this code below
 sudo snap install aws-cli --classic
 ```
 ```
---snap: a package management tool shop for wsl, like apt
---classic: classic confinemen mode, allowing aws-cli to get access to system file and resource.
+sudo snap install aws-cli: Uses Snap (an alternative package manager) to install AWS CLI.
+--classic: Enables classic confinement mode, allowing AWS CLI to access system files and resources without restrictions.
 ```
 
 After doing this, it will be installed successfully 
+### output:
 <img width="865" height="62" alt="image" src="https://github.com/user-attachments/assets/07876c1a-a848-4861-be84-64e4543a018f" />
 
-### [3] Configure AWS
+## [3] Configure AWS
+
+Configuration sets up credentials and defaults for AWS CLI, enabling secure and region-specific interactions.
 
 put the code below to configure aws 
 
@@ -128,27 +147,27 @@ aws configure
 ```
 it will activate the configure interface 
 
+### output:
 <img width="865" height="127" alt="image" src="https://github.com/user-attachments/assets/a4ccb44b-3df7-47a7-87cc-83589be0db38" />
 
 we will be required to input four types of information `AWS access key ID`, `AWS Secret Access Key`, `Default Region name`, `Default output format`
 
-the first two information can be found at the last step of creating access key. 
-From the region table, i can find the region name is `ap-southeast-2` according to my student id
-And the default output format is json 
+The first two are from the access key creation step. From the region table, I found the region name is `ap-southeast-2` based on my student ID. The default output format is JSON (selected for structured, machine-readable output).
 
+### output:
 <img width="865" height="127" alt="image" src="https://github.com/user-attachments/assets/23bc4275-6003-4ef0-9c0a-479fb8305b85" />
 
-### [4] Install boto3
+## [4] Install boto3
 
-boto3 is the root package to use all the services and resources in AWS, so we need to install it by putting the code below 
-
+Boto3 is the AWS SDK for Python, chosen to enable programmatic access to AWS services in scripts.
+Boto3 is the root package to use all the services and resources in AWS, so we need to install it by running:
 ```
 sudo apt install python3-boto3
 ```
-instead of usin `pip3`, I use `sudo apt install` to get package from the remote package shop directly. 
+Instead of using pip3, I used sudo apt install to get the package from the remote package repository directly (chosen for system-wide installation and dependency management).
 
 And we successfully installed it 
-
+### output:
 <img width="865" height="383" alt="image" src="https://github.com/user-attachments/assets/5fb65d27-7795-4f86-8ad6-5f971a8dcc43" />
 
 
@@ -157,6 +176,7 @@ And we successfully installed it
 
 ## [1] Test the AWS environment
 
+This test verifies AWS CLI configuration and access to EC2 service, ensuring we can interact with AWS resources.
 For this part, we need to test if AWS is configured successfully and if we can get access to its service and resources.
 
 Code:by using ec2 command to get regions table
@@ -165,16 +185,13 @@ Code:by using ec2 command to get regions table
 aws ec2 describe-regions --output table
 ```
 ```
---ec2:define the service as ec2
-```
-```
-describe-regions: describe all the available regions that can be used
-```
-```
---output table: define the format of output to table
+aws ec2: Specifies the EC2 service.
+describe-regions: Retrieves all available AWS regions.
+--output table: Formats the output as a table for readability (chosen over JSON for human-friendly display).
 ```
 
 So, we will get the table including all the available regions in AWS
+### output:
 <img width="865" height="493" alt="image" src="https://github.com/user-attachments/assets/61e123f5-ec96-46ff-b277-9c9f95315043" />
 
 
@@ -193,13 +210,13 @@ response = ec2.describe_regions()
 print(response)
 ```
 ```
-ec2 = boto3.client('ec2') : create a ec2 object to allow you to use ec2 service by this object
+import boto3: Imports the AWS SDK.
+ec2 = boto3.client('ec2'): Creates an EC2 client object (chosen for low-level API access).
+response = ec2.describe_regions(): Calls the method to retrieve regions, storing in response.
+print(response): Outputs the JSON response for verification.
 ```
-```
-response = ec2.describe_regions(): retreive all regions and return to response
-```
-then, i will get the json file including all regions 
-
+then, i will get the json file including all regions
+### output:
 <img width="865" height="418" alt="image" src="https://github.com/user-attachments/assets/bb3b9f38-12f7-423a-a0fc-378d8a41b338" />
 
 ## [3] Write a Python script
@@ -237,10 +254,20 @@ data.append([region["Endpoint"], region["RegionName"]])
 
 print(tabulate(data, headers=["Endpoint", "RegionName"]))
 ```
+
+Explaination:
+```
+import boto3 and from tabulate import tabulate: Import necessary libraries.
+ec2 = boto3.client("ec2"): Create EC2 client.
+response = ec2.describe_regions(): Fetch regions.
+data = []: Initialize list for table data.
+Loop: for region in response["Regions"]: Iterate over regions, appending endpoint and name to data.
+print(tabulate(data, headers=["Endpoint", "RegionName"])): Format and print as table (headers chosen for clarity).
+```
 For response, it will be a key called Regions that includes all the regions, so I retrieve them all and put it into list one by one, then display them as table by usin tabulate
 
 The output is just like this, from this table, we can see all the endpoints and region name 
-
+### output:
 <img width="865" height="367" alt="image" src="https://github.com/user-attachments/assets/a26708fb-1ad3-4016-91e4-ebb46b59316c" />
 
 
@@ -258,13 +285,14 @@ explaination:
 -Group-name:  the name of the group
 -Description: to demonstrate what does this use for
 -vpc—id: This is an optional choice, to define which vpc to use. If I don’t set this parameter, it will set the default vpc. 
-For this project, we don’t need to set the vpc-id
+For this project, we don’t need to set the vpc-id, so it uses the default VPC
 ```
 then, we wull get the response including groupid and securitygrouparn
+### output:
 <img width="865" height="81" alt="image" src="https://github.com/user-attachments/assets/0cda75ef-e51d-4830-ad9d-ac87333f0bb9" />
 
 ## [2] Authorise inbound traffic for ssh
-
+Authorizing SSH inbound traffic enables secure remote access to the instance, chosen as it's the standard protocol for Linux server management.
 In this part, we need to set the policy for inbound traffic
 code:
 
@@ -287,11 +315,11 @@ parameter:
 ```
 
 The output is like this below, it will show the securitygrouprules we just set 
-
+### output:
 <img width="865" height="229" alt="image" src="https://github.com/user-attachments/assets/57f3fcac-1c47-471f-9695-e1dedff1c566" />
 
 ## [3] Create a key pair
-
+Key pairs provide secure, passwordless SSH access. Generating one ensures only authorized users can connect, chosen over passwords for better security.
 we need to create a key pair to let AWS verify identification from users, it will generate a public key on ec2 and private on our local machine.
 
 code: 
@@ -322,6 +350,7 @@ Explaination:
 ```
 
 ## [4] Set the permission for this 
+Setting read-only permissions protects the private key from unauthorized access or modification, a security best practice.
 By running this code, we set the private key to only-read mode.
 ```
 chmod 400 24372276-key.pem
@@ -364,6 +393,7 @@ InstanceId is a unique identifier for your EC2 instance (like i-0abcd1234ef56789
 ```
 
 This will return the output of instance id, which is 
+### output:
 <img width="865" height="43" alt="image" src="https://github.com/user-attachments/assets/f8badb20-9f35-4309-b9f8-86bc0a64e06a" />
 
 ## [6] Add a tag to your Instance
@@ -385,7 +415,7 @@ Key=Name is a common convention in AWS to give a human-readable name to an insta
 Value=<Instance Name> is the actual name you want to assign (e.g., MyEC2Instance). As The tutorial provided, I need to set the name of the tags as 24372276-vm
 ```
 
-### [7] Get the public ip address 
+## [7] Get the public ip address 
 In this step, we are getting the ip address that ec2 opens for external users to get access to it 
 Code: 
 ```
@@ -403,17 +433,18 @@ Explaination:
  This query filters the output to return only the public IP address of the first instance in the first reservation.
 ```
 This will return the output of ip address,which is `13.239.39.99`
+### output:
 <img width="865" height="38" alt="image" src="https://github.com/user-attachments/assets/a70cfa30-e6d7-434b-a679-0cfe5da41ec1" />
 
 ## [8] Connect to the instance via ssh
 Then we use this ip address to connect the instance 
 
-**Code:**
+Code:
 
 ```
 ssh -i 24372276-key.pem ubuntu@13.239.39.99
 ```
-**Explaination:**
+Explaination:
 
 ```
 -i <student number>-key.pem
@@ -426,12 +457,13 @@ ubuntu is the username for the EC2 instance.
 ```
 Then, after putting code, I connected the instance successfully. 
 
+### output:
 <img width="865" height="601" alt="image" src="https://github.com/user-attachments/assets/21f9c973-15e6-44e1-aeba-e8b023869a33" />
 
-### [9] List the created instance using the AWS console
+## [9] List the created instance using the AWS console
 
 When I check the region ap-southeast-2, I can find the instance that is named by my id. 
-
+### output:
 <img width="865" height="109" alt="image" src="https://github.com/user-attachments/assets/b07f0a04-b793-43a2-b1a2-0e5d8de52679" />
 
 # Create an EC2 instance with Python Boto3
@@ -532,10 +564,20 @@ public_ip = response_desc['Reservations'][0]['Instances'][0].get('PublicIpAddres
 print(f"Public IP address of instance {instance_id}: {public_ip}")
 ```
 
+Explaination:
+```
+User Configurations: Define variables like student_number, region_name (chosen for location), ami_id (Ubuntu AMI), etc., for customization.
+Create EC2 Client: ec2 = boto3.client("ec2", region_name=region_name): Initializes client with region.
+Step 1: Create Security Group: Uses create_security_group with GroupName and Description; extracts ID.
+Step 2: Authorize SSH: Adds ingress rule for TCP/22 from anywhere.
+Step 3: Create Key Pair: Generates key, saves to .pem file.
+Step 4: Launch Instance: Runs instance with specified AMI, type, key, security group.
+Step 5: Add Tag: Tags for naming.
+Step 6: Get IP: Waits, describes instance, extracts public IP.
+```
+
 When I ran the python script, it will return the ip address finally. 
-
-**Output:**
-
+### output:
 <img width="865" height="94" alt="image" src="https://github.com/user-attachments/assets/943adbb9-7a24-4fd2-91f9-dee194aa329c" />
 
 
@@ -550,9 +592,9 @@ sudo apt install docker.io -y
 
 Explaination:
 ```
-This command is used for downloading the docker package
+sudo apt install docker.io -y: Installs Docker engine, with -y for non-interactive.
 ```
-
+### output:
 <img width="865" height="366" alt="image" src="https://github.com/user-attachments/assets/5bff8ddb-cfd1-4ea5-9d72-0a9a99266089" />
 
 ### [2] start and enable docker 
@@ -570,11 +612,11 @@ Code:
 ```
 docker –version
 ```
-
+### output:
 <img width="865" height="42" alt="image" src="https://github.com/user-attachments/assets/8d597ef3-446a-4fda-8ad2-6a56025b6542" />
 
 
-# Build and run an httpd container
+# Build and run an http container
 
 ## [1] create html file and Dockerfile
 ### Step 1 Create html and directory
@@ -593,7 +635,7 @@ touch is the command that is used to create the new file
 ### Step 2: Add contents to html.txt and DockerFile
 then, I added the basic html code into it.
 
-Output:
+### output:
 <img width="1329" height="345" alt="image" src="https://github.com/user-attachments/assets/b327890f-b3aa-4e51-b5c5-9df563cd5488" />
 
 
@@ -622,7 +664,7 @@ This piece of code is used to copy files from your computer (build context) into
 ./html/ : this locates the local folder html 
 /usr/local/apache2/htdocs/: this is the default folder of image
 ```
-
+### output:
 <img width="1317" height="219" alt="image" src="https://github.com/user-attachments/assets/d79a7dbb-314b-4fb2-9a47-32a089549cee" />
 
 ## [2] Build a docker image
@@ -643,7 +685,7 @@ In this case, the image will be called my-apache2.
 
 After my-apache2, it will be the path, which tells Docker where to look for the Dockerfile and any files referenced inside it.In this case, it will be current path,so it will be .
 ```
-
+### output:
 <img width="865" height="406" alt="image" src="https://github.com/user-attachments/assets/49fe354b-cc3b-4a69-854c-9650ca148843" />
 
 ## [3] run docker 
@@ -676,10 +718,10 @@ Makes the container behave like it has a real terminal.
 Assigns a custom name (my-app) to the container.
 ```
 After running this code, get access to the url http://localhost. It will show the hello world successfully.
-
+### output:
 <img width="658" height="368" alt="image" src="https://github.com/user-attachments/assets/f6fe78df-a6e7-482f-954b-74a8d0baf58a" />
 
-##[4] remove docker
+## [4] remove docker
 ### Step 1 Showing all current running docker
 
 First, showing all the current running docker
@@ -688,7 +730,7 @@ Code:
 ```
 docker ps -a
 ```
-
+### output:
 <img width="1713" height="141" alt="image" src="https://github.com/user-attachments/assets/8ae983d2-c9a5-4726-bebc-6780da9c274f" />
 ### Step 2 Stop the target docker
 
@@ -696,7 +738,7 @@ Second, stop the current running docker my-app
 ```
 docker stop my-app
 ```
-
+### output:
 <img width="948" height="69" alt="image" src="https://github.com/user-attachments/assets/dece645c-70d9-4351-9d07-1022f79b75b3" />
 
 ### Step 3 Remove docker
@@ -707,7 +749,7 @@ Then, remove it and list it again, it will show no docker is running
 docker rm my-app
 docker ps -a
 ```
-
+### output:
 <img width="1095" height="126" alt="image" src="https://github.com/user-attachments/assets/b7f76864-cc59-4101-85b4-ea423eab1136" />
 
 
@@ -738,7 +780,7 @@ Mkdir subdir
 touch subdir.txt
 ```
 and write some contents that are required in them
-
+### output:
 <img width="940" height="536" alt="image" src="https://github.com/user-attachments/assets/23c73dcc-a038-4e42-89c0-05d0e9c5445b" />
 
 ## [2] Save files to S3 bucket
@@ -814,9 +856,16 @@ for dir_name, subdir_list, file_list in os.walk(ROOT_DIR, topdown=True):
 
 print("All files uploaded successfully.")
 ```
-
-When I ran this code, it will show that we already put the all the files into the corresponded folder. 
-
+Explaination:
+```
+Imports and Config: Import libraries; define ROOT_DIR (local path), STUDENT_ID, bucket name (unique using ID), region (for location).
+Create S3 Client: s3 = boto3.client('s3', region_name=REGION_NAME): Initializes S3 client.
+Create Bucket: Tries to create bucket with location constraint (region-dependent handling for us-east-1 exception); handles existing bucket.
+upload_file Function: Composes S3 key preserving structure; uploads using upload_file.
+Traverse and Upload: Uses os.walk to traverse; calculates relative paths; calls upload_file for each file.
+When I ran this code, it will show that we already put the all the files into the corresponded folder.
+```
+### output:
 <img width="940" height="104" alt="image" src="https://github.com/user-attachments/assets/7cdc71e0-99a9-4e71-bbf5-5b0222d70ba0" />
 
 
@@ -869,10 +918,22 @@ else:
 
 print("All files restored successfully.")
 ```
+
+Explaination:
+```
+Config: Define bucket, restore dir, region.
+S3 Client: Initialize.
+Ensure Dir: Create restore dir if needed.
+List Objects: Fetch bucket contents.
+Loop Over Objects: For each, compose local path, create dirs, download.
+```
+
 When I ran the code, it will show all files restored successfully. 
+### output:
 <img width="940" height="72" alt="image" src="https://github.com/user-attachments/assets/eb3ee8c5-5b9b-4ad3-a6d7-4d49c06e4244" />
 
 And when I check my directory,  the restored_rootdir has been created and keep the same structure and file content.
+### output:
 <img width="504" height="141" alt="image" src="https://github.com/user-attachments/assets/913eb347-8967-44cf-af0b-568bbc05df65" />
 
 
@@ -896,7 +957,7 @@ then we get the dynamodb_local_latest.tar.gz from remote repository.
 wget https://s3-ap-northeast-1.amazonaws.com/dynamodb-local-tokyo/dynamodb_local_latest.tar.gz
 ```
 we will get the dynamodb_local_latest.tar.gz file, which is a compiled file for all tar files for local 
-
+### output:
 <img width="408" height="42" alt="image" src="https://github.com/user-attachments/assets/8a415b5f-4ea7-4125-9ac8-f3dc56668fda" />
 
 
@@ -905,10 +966,11 @@ then, we extract files from dynamodb_local_latest.tar.gz
 ```
 tar -zxvf dynamodb_local_latest.tar.gz
 ```
-
+### output:
 <img width="940" height="593" alt="image" src="https://github.com/user-attachments/assets/a0b9889d-ada5-4f54-a337-279196f87ff0" />
 
 it will retreive all the files that initialized the DynamnoDB
+### output:
 <img width="462" height="303" alt="image" src="https://github.com/user-attachments/assets/219702d3-19b6-4fd4-aabd-3b882df5c256" />
 
 ### Step 4 Activate local DynamoDB
@@ -919,7 +981,7 @@ java -Djava.library.path=./DynamoDBLocal_lib -jar DynamoDBLocal.jar -sharedDb
 ```
 
 From the wsl, we can see the DynamoDB is running now 
-
+### output:
 <img width="940" height="164" alt="image" src="https://github.com/user-attachments/assets/e6efded8-b7b8-4b5e-ab9c-4a987481e231" />
 
 ### Step 5 save files from s3 to DynamoDB
@@ -1022,8 +1084,9 @@ Explaination:
 ```
 we need to create table from the s3 bucket, so we use the same s3 bucket name that we created before. And set the end_point to localhost:8000, which is the default port for local db program.
 And as the requirements, we extract all the attributes from the response that is returned by the S3 bucket and put them into the local DynamoDB
-```
 
+```
+### output:
 <img width="940" height="138" alt="image" src="https://github.com/user-attachments/assets/93d48d4a-5283-472d-8a4f-5f52198a4f91" />
 
 ## [5] scan the table
@@ -1147,9 +1210,9 @@ Then we get the outcome in the console
 
 # Apply a policy to restrict permissions on the bucket
 ## [1] Apply policy to my S3 bucket
-
+Bucket policies enforce access control, chosen to restrict to authorized users only.
 First, I created a new S3 bucket with the same name and region name
-
+### output:
 <img width="865" height="58" alt="image" src="https://github.com/user-attachments/assets/2ed0cdfa-6405-47e7-ade4-aabbabdc65c2" />
 
 Second, I wrote a python script to set policy to my bucket.
@@ -1159,7 +1222,7 @@ import boto3
 import json
 
 # -----------------------------
-# 1. Define your variables
+# 1. Define variables
 # -----------------------------
 bucket_name = "24372276-cloudstorage"       
 student_number = "24372276"      
@@ -1226,7 +1289,7 @@ The condition part means there are some conditions can limit the deny
 ```
 
 Then, we run this python script.
-
+### output:
 <img width="865" height="50" alt="image" src="https://github.com/user-attachments/assets/c7e42eec-78db-4fcc-8879-43b413155460" />
 
 
@@ -1243,6 +1306,7 @@ get-bucket-policy : Retrieves the policy JSON currently applied to the bucket.
 bucket <s3_bucket_name>: Replace <s3_bucket_name> with our own bucket name.
 ```
 it will show the policy we just set 
+### output:
 <img width="1704" height="180" alt="image" src="https://github.com/user-attachments/assets/ce92cc1c-33ea-4388-8cea-20ff0b80d330" />
 
 # AES Encryption using KMS
@@ -1392,15 +1456,22 @@ kms.put_key_policy(
 
 print("Key policy set successfully.")
 ```
+Explaination:
+```
+Find Key ID: List aliases, match alias to get ID.
+Policy Definition: Allows root, admin actions for user, usage actions, grants with condition.
+Apply Policy: Use put_key_policy with JSON policy.
+```
 Use the put_key_policy method to put the policy into a specific key id
 
 when we run this code, we can see
-
+### output:
 <img width="865" height="74" alt="image" src="https://github.com/user-attachments/assets/b8358415-9d65-4729-bc89-db44da734c2e" />
 
 ## [3] Check whether the script works
 
 In the AWS KMS console, I clicked the alias named 24372276 that I just set, and we can see the policy showing that I’m the only key administrator and user
+### output:
 <img width="865" height="212" alt="image" src="https://github.com/user-attachments/assets/63488c5b-99bd-4af8-b41a-e80774228ea1" />
 <img width="865" height="429" alt="image" src="https://github.com/user-attachments/assets/cb6bc5c1-098b-49b7-b8c6-befaa72800c2" />
 
@@ -1473,7 +1544,7 @@ for obj in response["Contents"]:
     print(f"Decrypted {file_name} -> {decrypted_file_path}")
 ```
 
-
+### output:
 <img width="865" height="186" alt="image" src="https://github.com/user-attachments/assets/b4cbe976-165c-43ce-b41b-85a35c5b35c2" />
 
 ## [5] Apply pycryptodome for encryption/decryption
@@ -1578,14 +1649,13 @@ for obj in response["Contents"]:
 ```
 
 then, get all the files and encrypt and decrypt
-
+### output:
 <img width="865" height="123" alt="image" src="https://github.com/user-attachments/assets/0a204fbd-9f63-406b-a58e-bae89971393a" />
 
 
 ## [6] upload the files into s3 bucket
 
 We have two folders that need to be uploaded, like we did before, we walk through both folders and upload all the files within folders into s3 bucket. 
-
 
 ```
 import os
@@ -1622,7 +1692,7 @@ print("✅ All encrypted and decrypted files uploaded successfully.")
 ```
 
 it will show all files have been uploaded when we ran this script
-
+### output:
 <img width="865" height="238" alt="image" src="https://github.com/user-attachments/assets/69370aad-e2ee-4c50-af4e-f8252dd8982b" />
 
 
@@ -1744,6 +1814,9 @@ for res in instances_desc["Reservations"]:
     for inst in res["Instances"]:
         print(f"Instance {inst['InstanceId']} is running at {inst['PublicIpAddress']}")
 ```
+it will show that we already created two instances inn our console. 
+### output:
+<img width="1583" height="65" alt="image" src="https://github.com/user-attachments/assets/00b77fb5-8c23-44d6-b7e7-55e9466ff0a4" />
 
 ## [2] Create a load banlancer
 
@@ -1812,6 +1885,7 @@ print("✅ Listener created and attached to load balancer.")
 ```
 
 When we run this code piece, we will get the outcome below. 
+### output:
 <img width="865" height="125" alt="image" src="https://github.com/user-attachments/assets/1123c520-ea39-42f1-a623-b57551e3a4da" />
 
 ## [3] test the load balancer
@@ -1827,10 +1901,11 @@ ubuntu@13.211.89.236: username and ip address of ec2 instance
 ```
 
 It shows the permission denied. 
+### output:
 <img width="865" height="296" alt="image" src="https://github.com/user-attachments/assets/1b83dc76-aa44-41a2-836e-4e3b9b23a482" />
 
 I went to the ec2 console and click connect and then click the SSH client, I found that I need to execute the command as the website said. 
-
+### output:
 <img width="865" height="252" alt="image" src="https://github.com/user-attachments/assets/c48d25a8-d90e-4e5c-80b7-c0d486f4b019" />
 
 First, make sure the private key is not publicly viewed 
@@ -1856,6 +1931,7 @@ Second, try to connect it by SSH
 ssh -i "~/.ssh/24372276-key.pem" ubuntu@ec2-3-25-119-9.ap-southeast-2.compute.amazonaws.com
 ```
 And I get into the ec2 instance successfully
+### output:
 <img width="865" height="406" alt="image" src="https://github.com/user-attachments/assets/db52a185-fad9-44f6-ad31-1d1a2ad2fc6f" />
 
 
@@ -1874,14 +1950,15 @@ In the ec2 instance, We run the code to start editing the html page
 ```
 sudo nano /var/www/html/index.html
 ```
-
+### output:
 <img width="865" height="462" alt="image" src="https://github.com/user-attachments/assets/b6291247-bda6-4590-aabe-b10b2fcc8d11" />
 
 the previous title is like this 
+### output:
 <img width="865" height="105" alt="image" src="https://github.com/user-attachments/assets/ca591206-6e4a-4d24-9d10-c1e063ce964d" />
 
 I changed the tile to instance name "24372276-vm1"
-
+### output:
 <img width="865" height="99" alt="image" src="https://github.com/user-attachments/assets/b4144331-b11b-4880-b27e-356a0b3fb9aa" />
 
 Use Ctrl+O+enter to save and ctrl+x to exit 
@@ -1889,11 +1966,11 @@ Use Ctrl+O+enter to save and ctrl+x to exit
 ### Step 3 Test in the browser 
 
 First, keep the ec2 open, then input http://3.25.119.9/ in the browser, we will see the correct page below 
-
+### output:
 <img width="865" height="688" alt="image" src="https://github.com/user-attachments/assets/040287d2-c3f6-4cca-83ff-dab78f5d20a0" />
 
 And for vm2, we can get http://13.211.89.236/ to get the page. 
-
+### output:
 <img width="865" height="708" alt="image" src="https://github.com/user-attachments/assets/3157adcc-2439-4ec3-989a-96b16dd94008" />
 
 
