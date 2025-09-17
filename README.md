@@ -57,12 +57,14 @@ Then, I checked the version of my WSL by inputting the code below:
 ```
 wsl -l -v
 ```
+Explaination:
 ```
 -l : Lists all installed distributions.
 -v : Displays verbose output, including the version of each distribution.
 ```
 
 we can see the version of wsl, which is ubuntu 24.04
+### output:
 <img width="615" height="105" alt="image" src="https://github.com/user-attachments/assets/104397da-ffc2-40b9-b48f-5905fea4b847" />
 
 # Install Linux packages
@@ -90,6 +92,7 @@ Then, check the version of python by putting the code below, showing that i have
 ```
 python3 -V
 ```
+EXplaination:
 ```
 -V: Displays the Python version.
 ```
@@ -275,7 +278,7 @@ The output is just like this, from this table, we can see all the endpoints and 
 
 # Create an EC2 instance using awscli
 ## [1] Create a security group
-
+Security groups act as virtual firewalls. Creating one allows control over inbound/outbound traffic, chosen to secure the instance while permitting necessary access (e.g., SSH).
 Code:
 ```
 aws ec2 create-security-group --group-name 24372276-sg --description "security group for development environment"
